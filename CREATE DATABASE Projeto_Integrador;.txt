@@ -1,0 +1,60 @@
+CREATE DATABASE Projeto_Integrador;
+
+CREATE TABLE Cadastro
+(
+	id_user int PRIMARY KEY,
+	nomeCompleto varchar(255),
+	telefone int,
+	CPF int,
+	email varchar (100),
+	senha varchar (100)
+);
+
+CREATE TABLE Perfil
+(
+	NomeCompleto varchar (255),
+	email varchar (100),
+	descricao varchar (255),
+	RedesSociais varchar (255),
+	cursosExperiencia varchar (255),
+	ativo bool,
+	FOREIGN KEY (id_user) REFERENCES Cadastro(id_user),
+	FOREIGN KEY (id_login) REFERENCES Login(id_login),
+	FOREIGN KEY (id_CursosPessoais) REFERENCES CursosPessoais(id_CursosPessoais),
+	FOREIGN KEY (id_vagas) REFERENCES Vagas(id_vagas)
+);
+
+
+CREATE TABLE Login
+(
+	id_login int PRIMARY KEY,
+	email varchar (255),
+	senha varchar (255)
+);
+
+CREATE TABLE Cursos
+(
+	id_Cursos int PRIMARY KEY,
+	Nome_Curso varchar (255),
+	Duracao int,
+	preco int,
+	matrizCurricular varchar(255)
+);
+
+CREATE TABLE Vagas
+(
+	id_vagas PRIMARY KEY,
+	area varchar (255),
+	empresa varchar (255),
+	cargaHoraria int,
+	salario int
+);
+
+CREATE TABLE CursosPessoais
+(
+	id_CursosPessoais int PRIMARY KEY,
+	NomeCursoPessoal varchar (255),
+	duracaoCursoPessoal int,
+	matrizCurricularPessoal varchar (255),
+	precoCursoPessoal int
+);
