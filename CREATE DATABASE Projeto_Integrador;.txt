@@ -1,60 +1,60 @@
 CREATE DATABASE Projeto_Integrador;
 
-CREATE TABLE Cadastro
-(
-	id_user int PRIMARY KEY,
-	nomeCompleto varchar(255),
-	telefone int,
-	CPF int,
-	email varchar (100),
-	senha varchar (100)
+CREATE TABLE Cadastro (
+    id_user SERIAL PRIMARY KEY,
+    nomeCompleto VARCHAR(255) NOT NULL,
+    telefone VARCHAR(15) NOT NULL,
+    CPF VARCHAR(14) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    senha VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE Perfil
-(
-	NomeCompleto varchar (255),
-	email varchar (100),
-	descricao varchar (255),
-	RedesSociais varchar (255),
-	cursosExperiencia varchar (255),
-	ativo bool,
-	FOREIGN KEY (id_user) REFERENCES Cadastro(id_user),
-	FOREIGN KEY (id_login) REFERENCES Login(id_login),
-	FOREIGN KEY (id_CursosPessoais) REFERENCES CursosPessoais(id_CursosPessoais),
-	FOREIGN KEY (id_vagas) REFERENCES Vagas(id_vagas)
+drop table Cadastro
+Select * From Cadastro
+
+CREATE TABLE Perfil (
+    id_perfil serial PRIMARY KEY,
+    descricao VARCHAR(255),
+    RedesSociais VARCHAR(255),
+    cursosExperiencia VARCHAR(255),
+    ativo BOOLEAN DEFAULT TRUE,
+    user_idfk int, FOREIGN KEY (user_idfk) REFERENCES Cadastro(id_user), 
+    login_idfk int, FOREIGN KEY (login_idfk) REFERENCES Login(id_login),
+    cursos_pessoais_idfk int, FOREIGN KEY (cursos_pessoais_idfk) REFERENCES CursosPessoais(id_CursosPessoais),
+    vagas_idfk int, FOREIGN KEY (vagas_idfk) REFERENCES Vagas(id_vagas)
 );
 
+select C.nomeCompleto, P.descricao, C.email from Perfil p
+Inner join Cadastro C on P.user_idfk
 
-CREATE TABLE Login
-(
-	id_login int PRIMARY KEY,
-	email varchar (255),
-	senha varchar (255)
+CREATE TABLE Login1 (
+    id_login SERIAL PRIMARY KEY,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    senha VARCHAR(255) NOT NULL
+);
+Select * from Login1
+drop table Login1
+
+CREATE TABLE Cursos (
+    id_Cursos SERIAL PRIMARY KEY,
+    Nome_Curso VARCHAR(255) NOT NULL,
+    Duracao INT NOT NULL,
+    preco DECIMAL(10, 2) NOT NULL,
+    matrizCurricular TEXT
 );
 
-CREATE TABLE Cursos
-(
-	id_Cursos int PRIMARY KEY,
-	Nome_Curso varchar (255),
-	Duracao int,
-	preco int,
-	matrizCurricular varchar(255)
+CREATE TABLE Vagas (
+    id_vagas SERIAL PRIMARY KEY,
+    area VARCHAR(255) NOT NULL,
+    empresa VARCHAR(255) NOT NULL,
+    cargaHoraria INT NOT NULL,
+    salario DECIMAL(10, 2) NOT NULL
 );
 
-CREATE TABLE Vagas
-(
-	id_vagas PRIMARY KEY,
-	area varchar (255),
-	empresa varchar (255),
-	cargaHoraria int,
-	salario int
-);
-
-CREATE TABLE CursosPessoais
-(
-	id_CursosPessoais int PRIMARY KEY,
-	NomeCursoPessoal varchar (255),
-	duracaoCursoPessoal int,
-	matrizCurricularPessoal varchar (255),
-	precoCursoPessoal int
+CREATE TABLE CursosPessoais (
+    id_CursosPessoais SERIAL PRIMARY KEY,
+    NomeCursoPessoal VARCHAR(255) NOT NULL,
+    duracaoCursoPessoal INT NOT NULL,
+    matrizCurricularPessoal TEXT,
+    precoCursoPessoal DECIMAL(10, 2) NOT NULL
 );
