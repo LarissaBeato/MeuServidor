@@ -22,7 +22,6 @@ create table Usuario(
 
 Select * from Contatos
 
-
 UPDATE Contatos SET nome= 'larissaBeato', endereco='rua' where id=1;
 
 Select * from Usuario
@@ -67,3 +66,14 @@ select * from Contatos where nome = 'Larissa'
 delete from Usuarios where nomeUsuario = 'LarisaBeato'
 
 SELECT nome, endereco, telefone, email, celular, id, Contatos_idfk FROM Contatos WHERE nome like 'J%' AND  Contatos_idfk = 1; 
+
+CREATE TABLE chat (
+    id_chat SERIAL PRIMARY KEY,
+    nome VARCHAR(50) NOT NULL,
+    msg TEXT NOT NULL,
+    data TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+Drop table chat
+
+Select * from chat
