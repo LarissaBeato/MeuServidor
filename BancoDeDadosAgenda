@@ -17,7 +17,8 @@ create table Usuario(
 	senha varchar(50),
 	email varchar(50),
 	login varchar(50),
-	ativo boolean
+	ativo boolean,
+	imagem varchar(225)
 );
 
 Select * from Contatos
@@ -87,3 +88,5 @@ CREATE TABLE Tarefas
 	data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	idfk int, FOREIGN KEY (idfk) references Usuario (id)
 )
+
+Drop table Tarefas
