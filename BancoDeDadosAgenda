@@ -80,6 +80,7 @@ Drop table chat
 
 Select * from chat
 
+
 CREATE TABLE Tarefas
 (
 	id_tarefas serial PRIMARY KEY,
@@ -87,6 +88,6 @@ CREATE TABLE Tarefas
 	concluida BOOL,
 	data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	idfk int, FOREIGN KEY (idfk) references Usuario (id)
-)
+);
 
 Drop table Tarefas
