@@ -1,5 +1,3 @@
-CREATE DATABASE Projeto_Integrador;
-
 CREATE TABLE Cadastro (
     id_user SERIAL PRIMARY KEY,
     nomeCompleto VARCHAR(255) NOT NULL,
@@ -9,8 +7,8 @@ CREATE TABLE Cadastro (
     senha VARCHAR(255) NOT NULL
 );
 
-drop table Cadastro
-Select * From Cadastro
+INSERT INTO Cadastro (nomeCompleto, telefone, CPF, email, senha)
+VALUES ('Gabriel Moreira', '46991057504', '09087621211', 'gabriel@gmail.com', '123');
 
 CREATE TABLE Perfil (
     id_perfil serial PRIMARY KEY,
@@ -18,13 +16,20 @@ CREATE TABLE Perfil (
     RedesSociais VARCHAR(255),
     cursosExperiencia VARCHAR(255),
     ativo BOOLEAN DEFAULT TRUE,
-    user_idfk int, FOREIGN KEY (user_idfk) REFERENCES Cadastro(id_user), 
-    cursos_pessoais_idfk int, FOREIGN KEY (cursos_pessoais_idfk) REFERENCES CursosPessoais(id_CursosPessoais),
-    vagas_idfk int, FOREIGN KEY (vagas_idfk) REFERENCES Vagas(id_vagas)
+    user_idfk int, 
+    FOREIGN KEY (user_idfk) REFERENCES Cadastro(id_user),
+    cursos_pessoais_idfk int, 
+    FOREIGN KEY (cursos_pessoais_idfk) REFERENCES CursosPessoais(id_CursosPessoais),
+    vagas_idfk int, 
+    FOREIGN KEY (vagas_idfk) REFERENCES Vagas(id_vagas)
 );
 
-select C.nomeCompleto, P.descricao, C.email from Perfil p
-Inner join Cadastro C on P.user_idfk
+INSERT INTO Perfil (descricao, RedesSociais, cursosExperiencia, ativo, user_idfk)
+VALUES ('Estudante de tecnologia', 'gabriel@gmail.com', 'Técnico Desenvolvimento de Sistemas', true, 1);
+
+SELECT C.nomeCompleto, P.descricao, P.cursosExperiencia, C.email 
+FROM Perfil P
+INNER JOIN Cadastro C ON P.user_idfk = C.id_user;
 
 
 CREATE TABLE Cursos (
@@ -34,7 +39,6 @@ CREATE TABLE Cursos (
     preco DECIMAL(10, 2) NOT NULL,
     matrizCurricular TEXT
 );
-drop table Cursos
 
 CREATE TABLE Vagas (
     id_vagas SERIAL PRIMARY KEY,
@@ -43,7 +47,6 @@ CREATE TABLE Vagas (
     cargaHoraria INT NOT NULL,
     salario DECIMAL(10, 2) NOT NULL
 );
-drop table Vagas
 
 CREATE TABLE CursosPessoais (
     id_CursosPessoais SERIAL PRIMARY KEY,
@@ -52,4 +55,3 @@ CREATE TABLE CursosPessoais (
     matrizCurricularPessoal TEXT,
     precoCursoPessoal DECIMAL(10, 2) NOT NULL
 );
-drop table CursosPessoais
