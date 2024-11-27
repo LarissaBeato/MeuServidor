@@ -19,7 +19,6 @@ CREATE TABLE Perfil (
     cursosExperiencia VARCHAR(255),
     ativo BOOLEAN DEFAULT TRUE,
     user_idfk int, FOREIGN KEY (user_idfk) REFERENCES Cadastro(id_user), 
-    login_idfk int, FOREIGN KEY (login_idfk) REFERENCES Login1(id_login),
     cursos_pessoais_idfk int, FOREIGN KEY (cursos_pessoais_idfk) REFERENCES CursosPessoais(id_CursosPessoais),
     vagas_idfk int, FOREIGN KEY (vagas_idfk) REFERENCES Vagas(id_vagas)
 );
@@ -27,16 +26,6 @@ CREATE TABLE Perfil (
 select C.nomeCompleto, P.descricao, C.email from Perfil p
 Inner join Cadastro C on P.user_idfk
 
-CREATE TABLE Login1 (
-    id_login SERIAL PRIMARY KEY,
-    email VARCHAR(100) UNIQUE NOT NULL,
-    senha VARCHAR(255) NOT NULL,
-    id_user INT NOT NULL,
-    FOREIGN KEY (id_user) REFERENCES Cadastro (id_user) ON DELETE CASCADE
-);
-
-Select * from Login1
-drop table Login1
 
 CREATE TABLE Cursos (
     id_Cursos SERIAL PRIMARY KEY,
