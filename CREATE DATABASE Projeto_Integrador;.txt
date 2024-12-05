@@ -32,6 +32,8 @@ FROM Perfil P
 INNER JOIN Cadastro C ON P.user_idfk = C.id_user;
 
 
+table perfil
+
 CREATE TABLE Cursos (
     id_Cursos SERIAL PRIMARY KEY,
     Nome_Curso VARCHAR(255) NOT NULL,
